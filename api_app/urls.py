@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework import routers
 from .views import SignupView, GetCSRFToken, LoginView, LogoutView, CheckAuthenticatedView, DeleteAccountView, GetUsersView
 
 urlpatterns = [
@@ -10,3 +11,5 @@ urlpatterns = [
   path('csrf_cookie', GetCSRFToken.as_view()),
   path('get_users', GetUsersView.as_view())
 ]
+
+urlpatterns += routers.DefaultRouter().urls
