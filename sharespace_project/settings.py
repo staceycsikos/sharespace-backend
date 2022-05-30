@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,7 @@ SECRET_KEY = 'django-insecure-9#2%^(t5_lo((6&0ueqk98sgwty5yax2nin)adgri579nd2jod
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'profile_app',
     'post',
+    'api_app',
 ]
 
 MIDDLEWARE = [
@@ -134,14 +135,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+  'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.IsAuthenticated',
+  ],
+  'DEFAULT_AUTHENTICATION_CLASSES': [
+    'rest_framework.authentication.SessionAuthentication',
+  ]
 }
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
-]
+CSRF_COOKIE_HTTPONLY = False
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:8000/']
