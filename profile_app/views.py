@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from .serializers import ProfileSerializer
-from api_app.serializers import UserSerializer
+from .serializers import ProfileSerializer, UserSerializer
 from django.contrib.auth.models import User
 from .models import Profile
 from rest_framework import viewsets, permissions
@@ -14,8 +13,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
   queryset = Profile.objects.all()
   serializer_class = ProfileSerializer
-
-
 
 
 ## similar to line 19 seems like we need a specific user 
