@@ -24,6 +24,7 @@ class GetProfileView(APIView):
         username = user.username
 
         current_user = User.objects.get(id= user.id)
+        
         profileval_app = Profile.objects.get(user_id = user)
 
         # profile = Profile.objects.get(user=user)
