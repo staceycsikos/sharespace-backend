@@ -10,5 +10,5 @@ class Post(models.Model):
   publish_date = models.DateTimeField(default=timezone.now, blank=True)
 
   def __str__(self):
-    return self.post
+    return self.profile.user_id.username
 
