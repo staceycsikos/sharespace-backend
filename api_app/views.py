@@ -77,12 +77,17 @@ class SignupView(APIView):
                     else:
                         user = User.objects.create_user(
                             username=username, password=password)
+                        user.save()
+                        user_account = User.objects.get(id=user.id)
+                        user_profile = Profile.objects.create(user_id = user_account)
+                        user_profile.save()
+                        
 
-                        user = User.objects.get(id=user.id)
-
-                        profile_app = Profile.objects.create(
-                            user=user, first_name='', last_name='', email='', location='', image='', about='', birthday='', socialmedia='', profession='')
-
+                        # this brings in more of our custom user, I 
+                        # think we need to only associate it and let the other view update it
+                        # profile_app = Profile.objects.create(
+                        #     user=user, first_name='', last_name='', email='', location='', image='', about='', birthday='', socialmedia='', profession='')
+                        # profile_app.save()
                         return Response({'success': "User created successfully"})
             else:
                 return Response({'error': "Passwords do not match"})

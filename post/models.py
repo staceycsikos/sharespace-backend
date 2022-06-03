@@ -1,6 +1,4 @@
 from django.db import models
-from django.forms import DateTimeField
-from datetime import datetime
 from profile_app.models import Profile
 from django.utils import timezone
 
@@ -10,5 +8,5 @@ class Post(models.Model):
   publish_date = models.DateTimeField(default=timezone.now, blank=True)
 
   def __str__(self):
-    return self.post
+    return self.profile.user_id.username
 

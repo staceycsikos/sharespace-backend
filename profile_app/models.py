@@ -16,4 +16,4 @@ class Profile(models.Model):
   socialmedia = models.URLField(max_length=500, blank=True, unique=True )  
 
   def __str__(self):
-      return self.first_name
+      return self.user_id.username

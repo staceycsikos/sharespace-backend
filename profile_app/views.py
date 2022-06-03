@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import ProfileSerializer
-from api_app.serializers import UserSerializer
+from .serializers import ProfileSerializer, UserSerializer
+# from api_app.serializers import UserSerializer
 from django.contrib.auth.models import User
 from .models import Profile
 from rest_framework import viewsets, permissions
@@ -14,8 +14,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
   queryset = Profile.objects.all()
   serializer_class = ProfileSerializer
-
-
 
 
 ## similar to line 19 seems like we need a specific user 
@@ -57,7 +55,8 @@ class UpdateProfileView(APIView):
             # location = data['location']
 
         current_user = User.objects.get( id = user.id)
-        # print(current_user)
+        # print("In here")
+        print(Profile.objects.filter(user_id = current_user).last_name)
 
         
         # updatedProfile = 
@@ -78,33 +77,3 @@ class GetProfilesView(APIView):
       profiles = ProfileSerializer(profiles, many=True)
       return Response(profiles.data)
 
-
-            # Profile.objects.filter(user = current_user).update(first_name=data['first_name']).save()
-            # last_name=data['last_name'], email=data['email'], location=data['location'],
-            #                                         image=data['image'], about=data['about'], birthday=data['birthday'], socialmedia=data['socialmedia'], profession=data['profession'])
-             
-            # print (current_user)
-            # Profile.objects.filter(user=user).update(first_name=first_name, last_name=last_name, email=email, location=location,
-            #                                          image=image, about=about, birthday=birthday, socialmedia=socialmedia, profession=profession)
-
-        #     profileval = Profile.objects.get(user=user)
-        #     profile = ProfileSerializer(profileval)
-
-        #     print(profileval)
-
-        #     return Response({'profile': profile.data, 'username': str(username)})
-        # except:
-        #     return Response({'error': "Something went wrong when updating profile"})
-
-
-
-# WE DO NOT HAVE THESE LINKEDFIN DOES
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all().order_by('-date_joined')
-#     serializer_class = UserSerializer
-
-
-# class ProfileViewSet(viewsets.ModelViewSet):
-#     queryset = User_profile.objects.all()
-#     serializer_class = ProfileSerializer
