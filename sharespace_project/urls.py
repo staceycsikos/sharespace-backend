@@ -2,10 +2,10 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
-from post import views
+from post.views import PostViewSet
 
 urlpatterns = [
-    path('post/', views.PostViewSet.as_view({'get': 'list'})),
+    path('posts/', PostViewSet.as_view({'get': 'list','post': 'create'})),
     path('admin/', admin.site.urls),
     path('profile/', include('profile_app.urls')),
     path('', include('api_app.urls')),
