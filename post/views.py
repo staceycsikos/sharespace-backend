@@ -22,7 +22,9 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer = PostSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
+      print ("in the first")
       return Response(serializer.data)
     else:
+      print ("in the second")
       return Response(serializer.data)
     
