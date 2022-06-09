@@ -6,6 +6,11 @@ from rest_framework.response import Response
 from .models import Post
 
 
+
+
+# api view needed?
+
+
 class PostViewSet(viewsets.ModelViewSet):
   queryset = Post.objects.all()
   serializer_class = PostSerializer
@@ -15,10 +20,9 @@ class PostViewSet(viewsets.ModelViewSet):
   def create(self, request, pk=None):
     print (request.data)
     serializer = PostSerializer(data=request.data)
-
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data)
     else:
-      return Response("error possibly this guy right?")
+      return Response(serializer.data)
     
